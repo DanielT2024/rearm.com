@@ -1,0 +1,50 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <!-- <link href="{% static 'css/styles.css' %}" rel="stylesheet"> -->
+    <link href="https://fonts.cdnfonts.com/css/tt-firs-neue-trl" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/contact-form.css' %}"><!-- contact-form css -->
+    <link rel="stylesheet" href="{% static 'blog/css/main.css' %} ">      
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> <!-- navbar stysheet file -->
+    <link href="{% static 'css/hero.css' %}" rel="stylesheet"> <!-- hero stylesheet file -->
+    <link href="{% static 'css/services.css' %}" rel="stylesheet"> <!-- services stylesheet file -->
+    <link rel="stylesheet" href="{% static 'css/service_cards.css' %}"> <!-- services cards stylesheet file -->
+    <link rel="stylesheet" href="{% static 'css/book_demo_banner.css' %}"> <!-- book a demo stylesheet file -->
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/features.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ceo.css' %}"> <!-- ceo stylesheet file -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">   <!-- this controls the blog section of the homepage -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+</head>
+<body>
+     {% include 'includes/navbar.html' %}  <!-- Navbar snippet -->
+     
+    {% block content %}{% endblock %}     <!-- Page content -->
+    
+
+    
+    {% include 'includes/footer.html' %} 
+
+    <!-- Navbar javascript file -->
+<script src="{% static 'js/navbar.js' %}"></script>
+<script src="{% static 'js/product_detail.js' %}"></script>
+<script src="{% static 'js/post_detail.js' %}"></script>
+
+
+</body>
+</html>
+
+

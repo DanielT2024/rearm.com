@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{ meta_title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta property="og:title" content="{{ meta_title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  {% if about_content %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ about_content.image.url }}">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <main class="about-main">
+    <!-- Hero Section -->
+    {% with page_name="about" %}
+      {% include "includes/hero.html" %}
+    {% endwith %}
+
+    <!-- About Section -->
+    <section class="about-section">
+      <div class="container">
+        <h2>{{ about_content.title }}</h2>
+        {% if about_content %}
+        <div class="about-grid">
+          <div class="about-content">
+            
+            <div class="about-text">
+              {{ about_content.content|safe}}
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="{{ about_content.image.url }}" 
+                 alt="{{ about_content.title }}" 
+                 loading="lazy"
+                 width="600"
+                 height="400">
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+    <!-- ceo about section -->
+    <section id="leadership" class="leadership-section">
+        <div class="container">
+            <h2>Our Leadership</h2>
+            {% for leader in leadership %}
+            <div class="leader-profile">
+                <img src="{{ leader.photo.url }}" alt="{{ leader.name }}">
+                <div class="leader-details">
+                    <h3>{{ leader.name }} <span>{{ leader.title }}</span></h3>
+                    <div class="leader-bio">
+                        {{ leader.full_bio|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <!-- Team Section -->
+    <section class="team-section">
+      <div class="container">
+        <h2>Our Team</h2>
+        <p class="subtitle">Meet the people behind our success</p>
+        
+
+        <div class="team-cards">
+          {% for member in team_members %}
+          <div class="team-card">
+            <div class="card-image">
+              <img src="{{ member.image.url }}" 
+                   alt="{{ member.image_alt|default:member.name }}" 
+                   loading="lazy"
+                   width="300"
+                   height="300">
+            </div>
+            <div class="card-content">
+              <div class="card-name">
+                <h3>{{ member.name }}</h3>
+                <p class="position-name">{{ member.position }}</p>
+              </div>
+             
+              <p class="position">{{ member.bio }}</p>
+              <div class="social-links">
+                {% if member.linkedin %}
+                <a href="{{ member.linkedin }}" target="_blank" rel="noopener">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                {% endif %}
+                {% if member.twitter %}
+                <a href="{{ member.twitter }}" target="_blank" rel="noopener">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                {% endif %}
+
+                {% if member.facebook %}
+                <a href="{{ member.facebook }}" target="_blank" rel="noopener">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}

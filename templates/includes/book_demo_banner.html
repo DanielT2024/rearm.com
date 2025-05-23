@@ -1,0 +1,31 @@
+<!-- templates/includes/book_demo_banner.html -->
+
+{% load static %}
+
+{% block content %}
+<div class="demo-banner">
+  <div class="demo-content">
+    <h3>Ready to see it in action?</h3>
+    <p>Book a personalized demo with our team</p>
+    
+    <form method="POST" action="{% url 'book_demo' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.name }}
+      </div>
+      <div class="form-group">
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        {{ form.phone }}
+      </div>
+      <button type="submit" class="demo-btn">Book a Demo</button>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

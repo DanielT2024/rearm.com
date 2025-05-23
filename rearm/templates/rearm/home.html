@@ -1,0 +1,110 @@
+
+
+{% extends "base.html" %}
+{% load custom_filters %}
+
+
+{% block content %}
+  {# Your existing hero section #}
+  {% with page_name="home" %}
+    {% include "includes/hero.html" %}
+  {% endwith %}
+  
+   {% include "includes/features.html" %}
+  {# Simple Services Section #}
+
+    
+    {% if about_content %}
+    <section class="about-section">
+        <div class="container">
+           <h2>{{ about_content.title }}</h2>
+            <div class="about-grid">
+                <div class="about-content">
+                   
+                    <p>{{ about_content.content|striptags|truncatechars:500|safe }}</p>
+                    <a href="{% url 'about' %}" class="read-more-btn">Read More →</a>
+                </div>
+                <div class="about-image">
+                    <img src="{{ about_content.image.url }}" alt="{{ about_content.title }}">
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if ceo %}
+    <section class="ceo-spotlight">
+        <div class="container">
+            <div class="ceo-card">
+                <div class="ceo-image">
+                    <img src="{{ ceo.photo.url }}" alt="{{ ceo.name }}" loading="lazy">
+                </div>
+                <div class="ceo-content">
+                    <span class="tag">Leadership Spotlight</span>
+                    <h2>Message from Our CEO</h2>
+                    <p class="excerpt">{{ ceo.home_excerpt }}</p>
+                    <a href="{% url 'about' %}#leadership" class="cta-link">
+                        Read Full Message 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+ <!-- Featured Products Section -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <p></p>
+            <div class="product-grid">
+                {% for product in featured_products %}
+                <div class="product-card">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                       
+                    </a>
+                     <div class="product-info">
+                        <a href="{{ product.get_absolute_url }}">
+                           <h3>{{ product.name }}</h3>
+                        </a>
+                          <p class="product-description">{{ product.description }}</p>
+                            <p class="price">₦{{ product.price }}</p>
+                      </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a href="{% url 'product_list' %}" class="view-more-btn">View All Products →</a>
+            </div>
+        </div>
+    </section>
+
+    {% include "includes/book_demo_banner.html" %}
+
+
+    {% include "includes/blog.html" %}
+
+  <!-- <section class="services-home">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      {% for service in featured_services %}
+      <div class="service-card">
+        <img src="{{ service.image.url }}" alt="{{ service.title }}">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.short_description|safe }}</p>
+        <a href="{{ service.get_absolute_url }}">Learn More</a>
+      </div>
+      {% endfor %}
+    </div>
+    <a href="{% url 'services' %}" class="view-all">View All Services</a>
+  </section> -->
+     {% include 'includes/contact-form.html' %} 
+
+
+{% endblock %}
+
+
