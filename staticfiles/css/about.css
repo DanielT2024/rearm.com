@@ -1,0 +1,171 @@
+/* About Section */
+.about-main{
+  margin-bottom: 50px;
+}
+.about-section {
+  padding: 4rem 0;
+  font-family: 'TT Firs Neue Trl', sans-serif;
+  
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.container h2{
+  color: #00A784;
+}
+.about-grid {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+
+}
+
+.about-content {
+  flex: 1;
+}
+
+.about-content p {
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #00A784;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background: #1f5b21;
+}
+
+.about-image {
+  flex: 1;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Team Section */
+.team-section {
+  background: #f8f9fa;
+  padding: 2rem 0;
+
+ 
+}
+
+.team-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.team-cards {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.team-card {
+  margin: 0 auto;
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-content {
+  box-sizing: border-box;
+ position: relative;
+ padding: 1rem;
+ background-color: white;
+
+}
+
+.card-content h3 {
+  margin-bottom: 0.25rem;
+}
+.card-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* Optional spacing between name and position */
+}
+
+.card-name h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-name .position-name {
+  margin-right: 1rem;
+  color: #2563eb;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.position {
+  color: #000000;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-links a {
+  color: #09b2f5;
+  font-size: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-grid {
+    flex-direction: column;
+  }
+  
+  .team-cards {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  
+  .team-card {
+    flex: 1 1 250px;
+  }
+}
