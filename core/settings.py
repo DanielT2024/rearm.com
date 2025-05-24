@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rearm',
-    'tinymce',
     'blog',
-   'django_ckeditor_5',
+    'django_ckeditor_5',
     
 
     
@@ -132,46 +130,101 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
-
-# TinyMCE with FileBrowser
-TINYMCE_DEFAULT_CONFIG = { 
-    'height': 360,
-    'plugins': "image code media link",
-    'toolbar': "undo redo | bold italic | alignleft aligncenter alignright | code | image | media | link",
-    'file_picker_types': 'file image media',
-}
-
+# ckedior settings
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+customColorPalette = [
+        {
+            'color': 'hsl(4, 90%, 58%)',
+            'label': 'Red'
+        },
+        {
+            'color': 'hsl(340, 82%, 52%)',
+            'label': 'Pink'
+        },
+        {
+            'color': 'hsl(291, 64%, 42%)',
+            'label': 'Purple'
+        },
+        {
+            'color': 'hsl(262, 52%, 47%)',
+            'label': 'Deep Purple'
+        },
+        {
+            'color': 'hsl(231, 48%, 48%)',
+            'label': 'Indigo'
+        },
+        {
+            'color': 'hsl(207, 90%, 54%)',
+            'label': 'Blue'
+        },
+    ]
 CKEDITOR_5_CONFIGS = {
     'default': {
-        'toolbar': [
-            'heading', '|',
-            'bold', 'italic', 'link', 'underline', 'strikethrough', '|',
-            'bulletedList', 'numberedList', 'blockQuote', '|',
-            'imageUpload', 'insertTable', 'mediaEmbed', '|',
-            'undo', 'redo',
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', 'fileUpload' ],
+                    }
+
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
         ],
+        'toolbar': {
+            'items': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+                      'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                    'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                    'insertTable',
+                    ],
+            'shouldNotGroupWhenFull': 'true'
+        },
         'image': {
-            'toolbar': [
-                'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
             ]
+
         },
         'table': {
-            'contentToolbar': [
-                'tableColumn', 'tableRow', 'mergeTableCells'
+            'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
+            'tableProperties', 'tableCellProperties' ],
+            'tableProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            },
+            'tableCellProperties': {
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
+            }
+        },
+        'heading' : {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
             ]
-        },
-        'mediaEmbed': {
-            'previewsInData': True
-        },
-        'extraPlugins': [],
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
     }
 }
-
-
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

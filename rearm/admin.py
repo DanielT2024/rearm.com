@@ -1,14 +1,13 @@
 
 
 # Register your models here.
+from django.db import models
 from django.contrib import admin
 from .models import Navbar
 from django.utils.safestring import mark_safe
 from .models import HeroSection # hero section imported
-from tinymce.widgets import TinyMCE
-from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 from .models import Service
-
 from django.urls import reverse
 from django.utils.html import format_html
 from django.core.exceptions import ValidationError
@@ -81,7 +80,7 @@ class HeroAdmin(admin.ModelAdmin):
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()},
+        models.TextField: {'widget': CKEditor5Field()},
     }
     list_display = ('title', 'is_featured')
     prepopulated_fields = {'slug': ('title',)}

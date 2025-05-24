@@ -4,7 +4,8 @@ from django.utils.safestring import mark_safe
 from django.core.validators import URLValidator
 from django.core.validators import RegexValidator
 from django.urls import reverse
-from tinymce.models import HTMLField
+from django_ckeditor_5.fields import CKEditor5Field 
+
 from django.utils.text import slugify
 
 class Navbar(models.Model):
@@ -88,7 +89,7 @@ class HeroSection(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=200)
     short_description = models.TextField()
-    content = HTMLField()  # For rich content
+    content = CKEditor5Field('Text', config_name='extends') # For rich content
     image = models.ImageField(upload_to='services/')
     is_featured = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
@@ -118,7 +119,7 @@ class DemoBooking(models.Model):
 # aboutsection model
 class AboutSection(models.Model):
     title = models.CharField(max_length=200)
-    content = HTMLField()  # For rich content
+    content = CKEditor5Field('Text', config_name='extends')  # For rich content
     image = models.ImageField(upload_to='about/', help_text="Optimal size: 1200x800px")
     meta_title = models.CharField(max_length=60, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
@@ -131,7 +132,7 @@ class AboutSection(models.Model):
 class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    bio = models.TextField()  #use the ckeditor here for the bio
+    bio = CKEditor5Field('Text', config_name='extends') #use the ckeditor here for the bio
     image = models.ImageField(upload_to='team/', help_text="Optimal size: 600x600px (1:1 ratio)")
     image_alt = models.CharField(max_length=100, blank=True)
     linkedin = models.URLField(blank=True)

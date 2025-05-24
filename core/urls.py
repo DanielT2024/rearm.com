@@ -19,18 +19,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rearm import views
-from filebrowser.sites import site
-from filebrowser.sites import site
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/filebrowser/', site.urls),
     path('admin/', admin.site.urls),  # admin panel 
     path('', include('rearm.urls')),  # All frontend URLs now come from rearm/urls.py
     path('blog/', include('blog.urls')),  # Add this line
-    path('tinymce/', include('tinymce.urls')),
     path('ckeditor5/', include('django_ckeditor_5.urls')), 
 ]
 # Add static and media URLs if DEBUG is True
