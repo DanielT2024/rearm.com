@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rearm',
     'blog',
-    'django_ckeditor_5',
+    'ckeditor5',
     
 
     
