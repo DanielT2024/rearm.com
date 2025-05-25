@@ -91,14 +91,14 @@ def upload_media(request):
 # demon bookings
 
 
-def book_demo(request):
+def book_demo_page(request):
     if request.method == 'POST':
         form = DemoBookingForm(request.POST)
         if form.is_valid():
             booking = form.save()
             
             # Generate unique Calendly link (replace with your actual Calendly URL)
-            calendly_url = f"https://meet.brevo.com/daniel-edun/intro"
+            calendly_url = f"https://meet.brevo.com/rearm-resouces/30-minute-meeting"
             
             
             # Save the Calendly link to the booking
@@ -109,7 +109,7 @@ def book_demo(request):
     else:
         form = DemoBookingForm()
     
-    return render(request, 'includes/book_demo_banner.html', {'form': form})
+    return render(request, 'book_demo_page.html', {'form': form})
 
 
 

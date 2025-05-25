@@ -11,29 +11,54 @@
   {% endwith %}
   
    {% include "includes/features.html" %}
-  {# Simple Services Section #}
 
-    
+<section class="about-section fade-in-on-scroll hidden-section ">
+  <div class="container">
     {% if about_content %}
-    <section class="about-section">
-        <div class="container">
-           <h2>{{ about_content.title }}</h2>
-            <div class="about-grid">
-                <div class="about-content">
-                   
-                    <p>{{ about_content.content|striptags|truncatechars:500|safe }}</p>
-                    <a href="{% url 'about' %}" class="read-more-btn">Read More →</a>
-                </div>
-                <div class="about-image">
-                    <img src="{{ about_content.image.url }}" alt="{{ about_content.title }}">
-                </div>
-            </div>
+    <div class="about-grid">
+      <!-- Content Column -->
+      <div class="about-content">
+        <h1>{{ about_content.title }}</h1>
+        <p class="subtitle">{{ about_content.subtitle }}</p>
+        <div class="about-text">
+          {{ about_content.content|striptags|truncatechars:300|safe }}
+          
         </div>
-    </section>
+        <a href="{% url 'about' %}" class="learn-more-btn">Learn More</a>
+      </div>
+
+      <!-- Images Column -->
+      <div class="about-images">
+        <a href="https://wa.me/{{ about_content.phone_number|cut:' '|cut:'+' }}" 
+           class="whatsapp-float" 
+           target="_blank"
+           aria-label="Contact us on WhatsApp">
+          <i class="fab fa-whatsapp"></i> {{ about_content.phone_number }}
+        </a>
+        
+        <div class="main-image">
+          <img src="{{ about_content.main_image.url }}" 
+               alt="{{ about_content.title }}"
+               loading="lazy"
+               width="600"
+               height="400">
+        </div>
+        <div class="secondary-image">
+          <img src="{{ about_content.secondary_image.url }}" 
+               alt="{{ about_content.title }} secondary image"
+               loading="lazy"
+               width="300"
+               height="200">
+        </div>
+      </div>
+    </div>
     {% endif %}
+  </div>
+</section>
+
 
     {% if ceo %}
-    <section class="ceo-spotlight">
+    <section class="ceo-spotlight fade-in-on-scroll hidden-section">
         <div class="container">
             <div class="ceo-card">
                 <div class="ceo-image">
@@ -56,7 +81,7 @@
     {% endif %}
 
  <!-- Featured Products Section -->
-    <section class="featured-products">
+    <section class="featured-products fade-in-on-scroll hidden-section">
         <div class="container">
             <h2>Featured Products</h2>
             <p></p>
@@ -72,7 +97,8 @@
                            <h3>{{ product.name }}</h3>
                         </a>
                           <p class="product-description">{{ product.description }}</p>
-                            <p class="price">₦{{ product.price }}</p>
+                          <!-- uncomment this should you want this later -->
+                            <!-- <p class="price">₦{{ product.price }}</p> -->
                       </div>
                 </div>
                 {% endfor %}

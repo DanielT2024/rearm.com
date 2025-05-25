@@ -119,14 +119,26 @@ class DemoBooking(models.Model):
 # aboutsection model
 class AboutSection(models.Model):
     title = models.CharField(max_length=200)
-    content = CKEditor5Field('Text', config_name='extends')  # For rich content
-    image = models.ImageField(upload_to='about/', help_text="Optimal size: 1200x800px")
+    subtitle = models.CharField(max_length=200, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
+    content = CKEditor5Field('Text', config_name='extends')
+    main_image = models.ImageField(
+        upload_to='about/', 
+        help_text="Main image (1200x800px)",
+        null=True,
+        blank=True)
+    secondary_image = models.ImageField(
+        upload_to='about/', 
+        help_text="Secondary image (600x400px)",
+        null=True,
+        blank=True)
     meta_title = models.CharField(max_length=60, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+    
 
 # team member section
 class TeamMember(models.Model):
@@ -224,7 +236,8 @@ class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.PROTECT)
     product_type = models.CharField(max_length=50, choices=PRODUCT_TYPES)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    # uncomment should you need it in future
+    # price = models.DecimalField(max_digits=10, decimal_places=2)
 
     image = models.ImageField(upload_to='products/')              # Main thumbnail image
     image_360 = models.ImageField(upload_to='products/360/', null=True, blank=True)  # 360° equirectangular image
@@ -264,4 +277,24 @@ class Leadership(models.Model):
     def __str__(self):
         return f"{self.name} ({'CEO' if self.is_ceo else self.title})"
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -43,11 +43,12 @@
     <!-- Product Information -->
     <div class="product-info">
         <h1 class="product-title">{{ product.name }}</h1>
-        <div class="product-price">₦{{ product.price }}</div>
+        <!-- uncomment the following line to display product price -->
+        <!-- <div class="product-price">₦{{ product.price }}</div> -->
         <div class="product-description">
             {{ product.description|linebreaks }}
         </div>
-        <button class="add-to-cart-btn">Add to Cart</button>
+        <button class="add-to-cart-btn"> Schedule A Call </button>
     </div>
 </div>
 
@@ -63,7 +64,9 @@
                 <a href="{{ related.get_absolute_url }}">
                     <img src="{{ related.image.url }}" alt="{{ related.name }}">
                     <h3>{{ related.name }}</h3>
-                    <p>₦{{ related.price }}</p>
+                    <p class="product-description">{{ product.description|linebreaks }}</p>
+                    <!-- uncomment should you need it  -->
+                    <!-- <p>₦{{ related.price }}</p> -->
                 </a>
             </div>
             {% endfor %}

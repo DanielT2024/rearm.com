@@ -104,9 +104,24 @@ from .models import AboutSection, TeamMember
 
 @admin.register(AboutSection)
 class AboutSectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active')
+    list_display = ('title', 'subtitle', 'phone_number', 'is_active')
     list_editable = ('is_active',)
-
+    fieldsets = (
+        ('Header', {
+            'fields': ('title', 'subtitle', 'phone_number')
+        }),
+        ('Content', {
+            'fields': ('content', 'main_image', 'secondary_image')
+        }),
+        ('SEO', {
+            'fields': ('meta_title', 'meta_description'),
+            'classes': ('collapse',)
+        }),
+        ('Status', {
+            'fields': ('is_active',)
+        })
+    )
+    
 # team member
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
@@ -149,10 +164,12 @@ class ProductCategoryAdmin(admin.ModelAdmin):
     product_count.short_description = 'Products'
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'product_type', 'price', 'is_featured', 'is_active')
+    # add 'price' to list_display should you need price in future
+    list_display = ('name', 'category', 'product_type',  'is_featured', 'is_active')
     list_filter = ('category', 'product_type', 'is_featured', 'is_active')
     search_fields = ('name', 'description')
-    list_editable = ('price', 'is_featured', 'is_active')
+    # add 'price',  to list_editable should you need price in admin
+    list_editable = ('is_featured', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
     
     fieldsets = (

@@ -13,11 +13,11 @@
 
 
 
-<section class="product-section">
+<section class="product-section fade-in-on-scroll hidden-section">
     <div class="container">
         
         <!-- Agricultural Products -->
-        <div class="product-type-section">
+        <div class="product-type-section" data-aos="fade-up" data-aos-delay="100">
             <h2>Processed Products</h2>
             <p>Discover our Range of Agro Processed Products
             </p>
@@ -31,7 +31,8 @@
                     <div class="card-body-product">
                             <h3> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
                             <p class="product-description">{{ product.description }}</p>
-                            <p class="product-price">₦{{ product.price }}</p>
+                            <!-- uncomment should you need price -->
+                            <!-- <p class="product-price">₦{{ product.price }}</p> -->
                     </div>
                 </div>
                 {% endfor %}
@@ -39,7 +40,7 @@
         </div>
         
         <!-- Farming Equipment -->
-        <div class="product-type-section">
+        <div class="product-type-section" data-aos="fade-up" data-aos-delay="100">
             <h2>Raw Products</h2>
             <p class="des">Discover our Range of Agro Raw Products</p>
             <div class="product-grid">
@@ -52,7 +53,8 @@
                     <div class="card-body-product">
                         <h3> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
                         <p class="product-description">{{ product.description }}</p>
-                        <p class="product-price">₦{{ product.price }}</p>
+                        <!-- uncomment should you need price in furture -->
+                        <!-- <p class="product-price">₦{{ product.price }}</p> -->
                     </div>
                 </div>
                 {% endfor %}
