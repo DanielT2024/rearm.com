@@ -131,6 +131,13 @@
 .card-content-blog .excerpt {
     margin-bottom: 15px;
     opacity: 0.9;
+    
+}
+.ceo-excerpt{
+    color: black;
+}
+p.excerpt {
+    color: white;
 }
 
 .read-more {

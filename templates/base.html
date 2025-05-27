@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.cdnfonts.com/css/monument" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <link href="{% static 'css/animation.css' %}" rel="stylesheet">
@@ -24,6 +25,7 @@
     <link rel="stylesheet" href="{% static 'css/features.css' %}">
     <link rel="stylesheet" href="{% static 'css/products.css' %}">
     <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal-contact.css' %}">
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
     <link rel="stylesheet" href="{% static 'css/ceo.css' %}"> <!-- ceo stylesheet file -->
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">   <!-- this controls the blog section of the homepage -->
@@ -40,10 +42,143 @@
 
     
     {% include 'includes/footer.html' %} 
+    <!-- Contact Modal -->
+
+<div id="contactModal" class="contact-modal">
+  <div class="contact-modal-content">
+    <span class="contact-close-btn">&times;</span>
+    <div class="contact-modal-header">
+      <h2>Subscribe to Partner With Us</h2>
+      <p>Fill out the form below and we'll get back to you soon</p>
+    </div>
+    <form id="contactForm" class="contact-modal-form" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+        <div class="error-message" id="name-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+        <div class="error-message" id="email-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <div class="error-message" id="message-error"></div>
+      </div>
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Send Message</span>
+        <span class="spinner"></span>
+      </button>
+      <div id="form-response" class="form-response"></div>
+    </form>
+  </div>
+</div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById("contactModal");
+    const contactForm = document.getElementById('contactForm');
+    
+    // Universal trigger handler
+    document.addEventListener('click', function(e) {
+        // Check for any element with trigger class or data-attribute
+        const trigger = e.target.closest('[data-trigger-modal], .trigger-contact-modal, .nav-right a[href="#"]');
+        
+        if (trigger) {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+    
+    // Close handlers
+    document.querySelector('.contact-close-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+    
+    // Form submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('.submit-btn');
+            const responseDiv = document.getElementById('form-response');
+            
+            // Clear errors
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.textContent = '';
+            });
+            responseDiv.style.display = 'none';
+            
+            // Loading state
+            submitBtn.classList.add('loading');
+            
+            // AJAX submission
+            fetch("{% url 'submit_contact' %}", {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(handleResponse)
+            .catch(handleError);
+            
+            function handleResponse(response) {
+                return response.json().then(data => {
+                    submitBtn.classList.remove('loading');
+                    if (data.success) {
+                        showResponse('Thank you! We will contact you soon.', 'success');
+                        setTimeout(closeModal, 2000);
+                    } else {
+                        if (data.errors) {
+                            Object.entries(data.errors).forEach(([field, messages]) => {
+                                const errorElement = document.getElementById(`${field}-error`);
+                                if (errorElement) errorElement.textContent = messages[0];
+                            });
+                        } else {
+                            showResponse('Submission failed. Please try again.', 'error');
+                        }
+                    }
+                });
+            }
+            
+            function handleError() {
+                submitBtn.classList.remove('loading');
+                showResponse('Network error. Please try again.', 'error');
+            }
+        });
+    }
+    
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        if (contactForm) contactForm.reset();
+        document.getElementById('form-response').style.display = 'none';
+    }
+    
+    function showResponse(message, type) {
+        const responseDiv = document.getElementById('form-response');
+        responseDiv.textContent = message;
+        responseDiv.className = `form-response ${type}`;
+        responseDiv.style.display = 'block';
+    }
+});
+</script>
+    
+
+
+
+
 
     <!-- Navbar javascript file -->
 <script src="{% static 'js/navbar.js' %}"></script>
 <script src="{% static 'js/product_detail.js' %}"></script>
+<script src="{% static 'js/modal-contact.js' %}"></script>
 <script src="{% static 'blog/js/post_detail.js' %}"></script>
  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>

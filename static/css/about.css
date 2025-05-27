@@ -9,8 +9,8 @@
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  /* max-width: 1200px;
+  margin: 0 auto; */
   padding: 0 1.5rem;
 }
 .about-header {
@@ -243,7 +243,7 @@ p.subtitle-team {
   object-fit: cover;
 }
 
-.card-content {
+.card-content-team {
   box-sizing: border-box;
  position: relative;
  padding: 1rem;
@@ -251,23 +251,23 @@ p.subtitle-team {
 
 }
 
-.card-content h3 {
+.card-content-team h3 {
   margin-bottom: 0.25rem;
 }
-.card-name {
+.card-name-team {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem; /* Optional spacing between name and position */
 }
 
-.card-name h3 {
+.card-name-team h3 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.card-name .position-name {
+.card-name-team .position-name {
   margin-right: 1rem;
   color: #2563eb;
   font-weight: 500;
@@ -308,86 +308,101 @@ p.subtitle-team {
 }
 
 /* Core Values Section */
+/* NEW STYLES - DIFFERENT FROM ORIGINAL */
 .core-values {
-  padding: 5rem 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, #f8fff8 0%, #ffffff 100%);
 }
 
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   margin-bottom: 1rem;
-  color: #2a7a2c;
+  color: #1a5e1f;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .section-subtitle {
   text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  max-width: 600px;
-  margin: 0 auto 3rem;
+  font-size: 1.25rem;
+  color: #4a6b4c;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
 }
 
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
+  max-width: 1300px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .value-card {
   background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  text-align: center;
-  border-top: 4px solid transparent;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 30px rgba(42, 122, 44, 0.08);
+  transition: all 0.3s ease-out;
+  border: 1px solid #e0f0e1;
 }
 
 .value-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(42, 122, 44, 0.1);
-  border-top-color: #2a7a2c;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(42, 122, 44, 0.15);
+  border-color: #c2e3c4;
+}
+
+.card-content {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
 }
 
 .value-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  background: rgba(42, 122, 44, 0.1);
-  border-radius: 50%;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #d0ebd2 100%);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(26, 94, 31, 0.1);
 }
 
 .value-icon svg {
-  width: 40px;
-  height: 40px;
-  fill: #2a7a2c;
+  width: 28px;
+  height: 28px;
+  fill: #1a5e1f;
 }
 
-.value-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
+.value-text h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.85rem;
+  color: #1a3e1f;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.value-card p {
-  color: #666;
-  line-height: 1.6;
+.value-text p {
+  color: #5a6d5c;
+  line-height: 1.7;
   margin: 0;
+  font-size: 1rem;
 }
 
-/* Animation (requires AOS library) */
+/* Animation */
 [data-aos] {
-  transition: all 0.8s ease;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 [data-aos="fade-up"] {
-  transform: translateY(30px);
+  transform: translateY(40px);
   opacity: 0;
 }
 
@@ -397,9 +412,55 @@ p.subtitle-team {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .values-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .core-values {
+    padding: 4rem 0;
+  }
+  
+  .section-title {
+    font-size: 2.25rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+  
   .values-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 500px;
+    padding: 0 1.5rem;
+  }
+  
+  .value-card {
+    padding: 1.5rem;
+  }
+  
+  .card-content {
+    gap: 1.5rem;
+  }
+  
+  .value-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-content {
+    gap: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .value-icon {
+    margin-bottom: 0.5rem;
   }
 }

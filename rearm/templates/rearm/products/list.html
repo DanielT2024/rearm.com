@@ -17,9 +17,10 @@
     <div class="container">
         
         <!-- Agricultural Products -->
+         {% if agricultural_products %}
         <div class="product-type-section" data-aos="fade-up" data-aos-delay="100">
             <h2>Processed Products</h2>
-            <p>Discover our Range of Agro Processed Products
+            <p class="des">Discover our Range of Agro Processed Products
             </p>
             <div class="product-grid">
                 {% for product in agricultural_products %}
@@ -38,8 +39,9 @@
                 {% endfor %}
             </div>
         </div>
-        
+        {% endif %}
         <!-- Farming Equipment -->
+         {% if equipment_products %}
         <div class="product-type-section" data-aos="fade-up" data-aos-delay="100">
             <h2>Raw Products</h2>
             <p class="des">Discover our Range of Agro Raw Products</p>
@@ -60,6 +62,7 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
 

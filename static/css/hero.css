@@ -33,7 +33,7 @@
 }
 
 .hero-title {
-  font-family: 'TT Firs Neue Trl', sans-serif;
+  font-family: 'Monument', sans-serif  !important;                  
   color: rgb(255, 255, 255);
   font-size: 3.5rem;
   font-weight: 800;
@@ -152,4 +152,12 @@ a.cta-btn.primary:hover {
     padding: 0.8rem 2rem;
     font-size: 1rem;
   }
+}
+
+
+@media (max-width: 500px){
+  .hero-grunge{
+    top: -627px;
+  }
+  
 }

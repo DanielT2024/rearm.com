@@ -65,9 +65,9 @@
                     <img src="{{ ceo.photo.url }}" alt="{{ ceo.name }}" loading="lazy">
                 </div>
                 <div class="ceo-content">
-                    <span class="tag">Leadership Spotlight</span>
-                    <h2>Message from Our CEO</h2>
-                    <p class="excerpt">{{ ceo.home_excerpt }}</p>
+                    <span class="tag">Visionary Leadership Spotlight</span>
+                    
+                    <p class=".ceo-excerpt">{{ ceo.home_excerpt }}</p>
                     <a href="{% url 'about' %}#leadership" class="cta-link">
                         Read Full Message 
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -128,7 +128,7 @@
     </div>
     <a href="{% url 'services' %}" class="view-all">View All Services</a>
   </section> -->
-     {% include 'includes/contact-form.html' %} 
+     
 
 
 {% endblock %}
