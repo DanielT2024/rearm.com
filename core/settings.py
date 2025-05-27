@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Project-level static
-STATIC_ROOT = os.path.join(BASE_DIR, '/staticfiles/')  # production level static collection
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')  # production level static collection
 
 
 # media/settings.py
