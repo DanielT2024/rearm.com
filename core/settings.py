@@ -21,12 +21,12 @@ DEBUG = config('DEBUG', cast=bool)
 SECRET_KEY = config('SECRET_KEY')
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
 
-cloudinary.config( 
-  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
-  api_key = os.getenv('CLOUDINARY_API_KEY'),
-  api_secret = os.getenv('CLOUDINARY_API_SECRET'),
-  secure = True
-)
+# cloudinary.config( 
+#   cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
+#   api_key = os.getenv('CLOUDINARY_API_KEY'),
+#   api_secret = os.getenv('CLOUDINARY_API_SECRET'),
+#   secure = True
+# )
 
 # Application definition
 
@@ -146,12 +146,12 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    'SECURE': True,
-    'MEDIA_TAG': 'media',
-    'STATIC_TAG': 'static',
-    'INVALID_VIDEO_ERROR': True,
-    'EXCLUDE_DELETE_ORPHANED_MEDIA_PATHS': (),
-    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'manifest')
+    # 'SECURE': True,
+    # 'MEDIA_TAG': 'media',
+    # 'STATIC_TAG': 'static',
+    # 'INVALID_VIDEO_ERROR': True,
+    # 'EXCLUDE_DELETE_ORPHANED_MEDIA_PATHS': (),
+    # 'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'manifest')
 }
 
 
