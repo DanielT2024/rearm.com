@@ -19,9 +19,9 @@ from blog.models import Post
 
 
 
-def home(request):
-    # Navbar data is already available via context processor
-    return render(request, "rearm/home.html")
+# def home(request):
+#     # Navbar data is already available via context processor
+#     return render(request, "rearm/home.html")
 
 
 def home(request):
