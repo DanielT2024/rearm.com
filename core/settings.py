@@ -3,8 +3,8 @@ from pathlib import Path
 import dj_database_url
 from decouple import config, Csv
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,14 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = config('DEBUG', cast=bool)
 SECRET_KEY = config('SECRET_KEY')
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS',default='127.0.0.1', cast=Csv())
 
-# cloudinary.config( 
-#   cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
-#   api_key = os.getenv('CLOUDINARY_API_KEY'),
-#   api_secret = os.getenv('CLOUDINARY_API_SECRET'),
-#   secure = True
-# )
 
 # Application definition
 
@@ -46,9 +40,6 @@ INSTALLED_APPS = [
 
     
 ]
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
 
 
 
@@ -82,16 +73,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
-# security settings
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = [
-    f"https://{host}" for host in config('ALLOWED_HOSTS', cast=Csv())
-]
-
 
 
 # Database
@@ -142,17 +123,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    # 'SECURE': True,
-    # 'MEDIA_TAG': 'media',
-    # 'STATIC_TAG': 'static',
-    # 'INVALID_VIDEO_ERROR': True,
-    # 'EXCLUDE_DELETE_ORPHANED_MEDIA_PATHS': (),
-    # 'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'manifest')
-}
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -198,6 +169,7 @@ customColorPalette = [
             'label': 'Blue'
         },
     ]
+
 CKEDITOR_5_CONFIGS = {
    
     'default': {
@@ -286,3 +258,13 @@ CKEDITOR_5_CONFIGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+cloudinary.config( 
+  cloud_name = 'dohc0nhqa',
+  api_key = '836418837643746',
+  api_secret = 'aHQAsMPUlMM-MNuprzxnX7fo4dI',
+  secure = True
+)

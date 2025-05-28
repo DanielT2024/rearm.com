@@ -180,7 +180,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('image', 'image_360'),
         }),
         ('Details', {
-            'fields': ('description', 'price'),
+            'fields': ('description', ), # add 'price' to fields if you need it
         }),
         ('Flags', {
             'fields': ('is_featured', 'is_active'),
