@@ -16,8 +16,8 @@ from django.views.decorators.http import require_GET
 from .models import AboutSection, TeamMember, Navbar
 from .models import Product
 from blog.models import Post
-
-
+from cloudinary.uploader import upload as cloudinary_upload
+from cloudinary.exceptions import Error as CloudinaryError
 
 # def home(request):
 #     # Navbar data is already available via context processor
@@ -66,25 +66,27 @@ def service_detail(request, slug):
 
 
 
+# uploading images to cloudinary
 
 @csrf_exempt
 def upload_media(request):
-    if request.FILES:
-        file = request.FILES['file']
-        # Create unique filename
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        ext = os.path.splitext(file.name)[1]
-        filename = f"uploads/{timestamp}{ext}"
-        
-        # Save file
-        with open(f"media/{filename}", 'wb+') as dest:
-            for chunk in file.chunks():
-                dest.write(chunk)
-                
-        return JsonResponse({
-            'location': f"/media/{filename}"
-        })
+    if request.method == 'POST' and request.FILES:
+        try:
+            file = request.FILES['file']
+
+            # Upload to Cloudinary under 'media/' folder
+            result = cloudinary_upload(file, folder='media/')
+
+            # Return the Cloudinary URL
+            return JsonResponse({
+                'location': result['secure_url']
+            })
+
+        except CloudinaryError as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
     return JsonResponse({'error': 'Invalid upload'}, status=400)
+
 
 
 
@@ -181,5 +183,3 @@ def product_detail(request, slug):
         'related_products': related_products,
         }
     return render(request, 'rearm/products/detail.html', context)
-
-
