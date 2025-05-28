@@ -5,11 +5,11 @@ from django.core.validators import URLValidator
 from django.core.validators import RegexValidator
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field 
-
+from cloudinary.models import CloudinaryField 
 from django.utils.text import slugify
 
 class Navbar(models.Model):
-    logo = models.ImageField(upload_to='navbar/')  # Stores in `media/navbar/`
+    logo = CloudinaryField('image', folder="navbar") # Stores in `media/navbar/`
     site_name = models.CharField(max_length=100)
 
     def logo_preview(self):
@@ -34,7 +34,8 @@ class HeroSection(models.Model):
     
     # Core fields
     page = models.CharField(max_length=20, choices=PAGE_CHOICES, unique=True)
-    background_image = models.ImageField(upload_to='hero/')
+    background_image = CloudinaryField('image', folder="hero") 
+    # background_image = models.ImageField(upload_to='hero/')
     title = models.CharField(max_length=100)
     subtitle = models.TextField(blank=True)
     
@@ -90,7 +91,8 @@ class Service(models.Model):
     title = models.CharField(max_length=200)
     short_description = models.TextField()
     content = CKEditor5Field('Text', config_name='extends') # For rich content
-    image = models.ImageField(upload_to='services/')
+    image = CloudinaryField('image', folder="services")
+    # image = models.ImageField(upload_to='services/')
     is_featured = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
     
@@ -122,16 +124,18 @@ class AboutSection(models.Model):
     subtitle = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     content = CKEditor5Field('Text', config_name='extends')
-    main_image = models.ImageField(
-        upload_to='about/', 
-        help_text="Main image (1200x800px)",
-        null=True,
-        blank=True)
-    secondary_image = models.ImageField(
-        upload_to='about/', 
-        help_text="Secondary image (600x400px)",
-        null=True,
-        blank=True)
+    main_image = CloudinaryField('image', folder="about", help_text="Main image (1200x800px)", null=True, blank=True)
+    # main_image = models.ImageField(
+    #     upload_to='about/', 
+        
+    #     null=True,
+    #     blank=True)
+    secondary_image = CloudinaryField('image', folder="about", help_text="Secondary image (600x400px)", null=True, blank=True)
+    # secondary_image = models.ImageField(
+    #     upload_to='about/', 
+        
+    #     null=True,
+    #     blank=True)
     meta_title = models.CharField(max_length=60, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
     is_active = models.BooleanField(default=True)
@@ -145,7 +149,8 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     bio = CKEditor5Field('Text', config_name='extends') #use the ckeditor here for the bio
-    image = models.ImageField(upload_to='team/', help_text="Optimal size: 600x600px (1:1 ratio)")
+    image = CloudinaryField('image', folder="team", help_text="Optimal size: 600x600px (1:1 ratio)")
+    # image = models.ImageField(upload_to='team/', help_text="Optimal size: 600x600px (1:1 ratio)")
     image_alt = models.CharField(max_length=100, blank=True)
     linkedin = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
@@ -171,7 +176,8 @@ class TeamMember(models.Model):
 
 class CompanyInfo(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='company/')
+    logo = CloudinaryField('image', folder="company") 
+    # logo = models.ImageField(upload_to='company/')
     address = models.TextField()
     phone_number_1 = models.CharField(max_length=20)
     phone_number_2 = models.CharField(max_length=20, blank=True, null=True)
@@ -238,9 +244,9 @@ class Product(models.Model):
     description = models.TextField()
     # uncomment should you need it in future
     # price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    image = models.ImageField(upload_to='products/')              # Main thumbnail image
-    image_360 = models.ImageField(upload_to='products/360/', null=True, blank=True)  # 360° equirectangular image
+    image = CloudinaryField('image', folder="products")
+    image_360 = CloudinaryField('image', folder="products/360", null=True, blank=True)
+    
 
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -264,7 +270,7 @@ class Product(models.Model):
 class Leadership(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='leadership/')
+    photo = CloudinaryField('image', folder="leadership") 
     home_excerpt = models.TextField(max_length=200, help_text="Short message for homepage")
     full_bio = models.TextField(help_text="Full bio for about page")
     is_ceo = models.BooleanField(default=False)
