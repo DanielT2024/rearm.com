@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from .models import Post, Category, NewsletterSubscriber, ContactMessage
+from .models import Post, Category, NewsletterSubscriber, PartnershipRequest
 from django_ckeditor_5.widgets import CKEditor5Widget
 
 class PostAdminForm(forms.ModelForm):
@@ -28,8 +28,44 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'subscribed_at')
     search_fields = ('email',)
 
-@admin.register(ContactMessage)
-class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'sent_at', 'is_read')
-    list_filter = ('is_read', 'sent_at')
-    search_fields = ('name', 'email', 'message')
+from django.contrib import admin
+from .models import PartnershipRequest
+
+@admin.register(PartnershipRequest)
+class PartnershipRequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'business_name', 'business_type', 'submitted_at', 'status_icon')
+    list_filter = ('business_type', 'submitted_at')
+    search_fields = ('name', 'email', 'business_name', 'phone')
+    list_per_page = 20
+    date_hierarchy = 'submitted_at'
+    readonly_fields = ('submitted_at',)
+    fieldsets = (
+        ('Contact Information', {
+            'fields': ('name', 'email', 'phone', 'position')
+        }),
+        ('Business Details', {
+            'fields': ('business_name', 'business_type', 'business_location')
+        }),
+        ('Request Information', {
+            'fields': ('interest', 'message', 'submitted_at')
+        }),
+    )
+    
+    def status_icon(self, obj):
+        return '📩'  # You can customize this with different icons based on status
+    status_icon.short_description = 'Status'
+    
+    def has_add_permission(self, request):
+        return False  # Disable adding new requests directly from admin
+    
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+    
+    def get_readonly_fields(self, request, obj=None):
+        # Make all fields readonly after creation
+        if obj:  # Editing an existing object
+            return [f.name for f in self.model._meta.fields]
+        return self.readonly_fields

@@ -307,8 +307,93 @@ p.subtitle-team {
   }
 }
 
+/* mision and vision statement */
+.mission-vision-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+@media (min-width: 768px) {
+    .mission-vision-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.statement-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.statement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.vision-card {
+    border-top: 5px solid #4CAF50;
+}
+
+.mission-card {
+    border-top: 5px solid #FF9800;
+}
+
+.statement-header {
+    display: flex;
+    align-items: center;
+    padding: 25px 25px 15px;
+    background: linear-gradient(to right, #f9f9f9, white);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.vision-card .icon-circle {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.mission-card .icon-circle {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
+
+.statement-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.statement-content {
+    padding: 15px 25px 30px;
+}
+
+.statement-content p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 16px;
+    margin: 0;
+}
+
+
 /* Core Values Section */
-/* NEW STYLES - DIFFERENT FROM ORIGINAL */
+
 .core-values {
   padding: 6rem 0;
   background: linear-gradient(to bottom, #f8fff8 0%, #ffffff 100%);

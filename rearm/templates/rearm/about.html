@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block head %}
+  
   <title>{{ meta_title }}</title>
   <meta name="description" content="{{ meta_description }}">
   <link rel="canonical" href="{{ canonical_url }}">
@@ -20,9 +21,7 @@
     {% endwith %}
 
     <!-- About Section -->
-   <div class="nav-right">
-    <a href="#" class="contact-modal-btn" data-trigger-modal="contactModal" >Partner with us</a>
-</div>
+   
 
     <section class="about-section fade-in-on-scroll hidden-section ">
       <div class="container">
@@ -67,6 +66,38 @@
         {% endif %}
       </div>
     </section>
+    
+    <!-- vision and mission statement -->
+
+    <div class="mission-vision-container fade-in-on-scroll hidden-section ">
+    <div class="statement-card vision-card">
+        <div class="statement-header">
+            <div class="icon-circle">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                    <path fill="currentColor" d="M15,23H9V20.5C9,19.12 10.12,18 11.5,18H12.5C13.88,18 15,19.12 15,20.5M22,8V18L18,22H4A2,2 0 0,1 2,20V6A2,2 0 0,1 4,4H6V7A1,1 0 0,0 7,8H17A1,1 0 0,0 18,7V4H20A2,2 0 0,1 22,6M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2Z"/>
+                </svg>
+            </div>
+            <h2>Our Vision</h2>
+        </div>
+        <div class="statement-content">
+            <p>To be a leading force in agricultural trade-empowering food supply chains locally and globally through the consistent delivery of premium raw crop produce, while fostering sustainable growth for our communities, clients, and workforce.</p>
+        </div>
+    </div>
+
+    <div class="statement-card mission-card">
+        <div class="statement-header">
+            <div class="icon-circle">
+                <svg viewBox="0 0 24 24" width="32" height="32">
+                    <path fill="currentColor" d="M3,3H21V7H3V3M4,8H20V21H4V8M9.5,11A0.5,0.5 0 0,0 9,11.5V13H15V11.5A0.5,0.5 0 0,0 14.5,11H9.5Z"/>
+                </svg>
+            </div>
+            <h2>Our Mission</h2>
+        </div>
+        <div class="statement-content">
+            <p>To drive food security and economic advancement by supplying the finest agricultural products at fair, competitive prices. We are committed to responsible sourcing, efficient distribution, and professional management services-ensuring every transaction contributes to opportunity, trust, and long-term success for our partners, employees and the market we serve.</p>
+        </div>
+    </div>
+</div>
 
     <!-- core values -->
 

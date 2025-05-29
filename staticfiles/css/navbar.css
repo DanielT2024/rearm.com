@@ -37,7 +37,22 @@
   max-width: 120px;
   line-height: 1.2;
 }
+.contact-modal-btn {
+  background-color: #53ff03;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.contact-modal-btn:hover {
+  background-color: #2980b9;
+  color: white !important;
+  transform: translateY(-2px);
+}
 /* Desktop Navigation */
 .navbar-links {
   display: flex;

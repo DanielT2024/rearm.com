@@ -1,5 +1,5 @@
 from django import forms
-from .models import NewsletterSubscriber, ContactMessage, Category
+from .models import NewsletterSubscriber, Category
 from django_ckeditor_5.widgets import CKEditor5Widget
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -25,15 +25,3 @@ class NewsletterForm(forms.ModelForm):
             })
         }
 
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = ContactMessage
-        fields = ['name', 'email', 'message']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'message': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 4
-            }),
-        }

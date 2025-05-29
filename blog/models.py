@@ -50,12 +50,22 @@ class NewsletterSubscriber(models.Model):
     def __str__(self):
         return self.email
 
-class ContactMessage(models.Model):
+
+# partnership
+
+
+class PartnershipRequest(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    message = models.TextField()
-    sent_at = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
+    position = models.CharField(max_length=100, blank=True)
+    phone = models.CharField(max_length=20)
+    business_name = models.CharField(max_length=100)
+    business_type = models.CharField(max_length=100)
+    business_location = models.CharField(max_length=100, blank=True)
+    interest = models.CharField(max_length=200)
+    message = models.TextField(blank=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"Message from {self.name}"
+        return f"Partnership request from {self.name}"
+

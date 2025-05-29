@@ -1,4 +1,10 @@
 /* static/css/hero.css */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/static/fonts/MonumentExtended-Ultrabold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .hero-section {
   height: 100vh;
   background-size: cover;
@@ -10,7 +16,7 @@
   text-align: center;
   position: relative;
   color: white;
-  font-family: 'TT Firs Neue Trl', sans-serif;
+  font-family: 'MonumentExtended', sans-serif;
   overflow: hidden;
 }
 
@@ -33,7 +39,7 @@
 }
 
 .hero-title {
-  font-family: 'Monument', sans-serif  !important;                  
+  font-family: 'MonumentExtended', sans-serif  !important;                  
   color: rgb(255, 255, 255);
   font-size: 3.5rem;
   font-weight: 800;

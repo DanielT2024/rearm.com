@@ -72,7 +72,7 @@
             <form class="newsletter-form" id="newsletterForm" method="post" action="{% url 'subscribe_newsletter' %}">
                 {% csrf_token %}
                 <input type="email" name="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe</button>
+                <button type="submit" id="subscribeBtn">Subscribe</button>
             </form>
             <div id="newsletterResponse" class="newsletter-response"></div>
         </section>

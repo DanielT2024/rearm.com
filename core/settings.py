@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import dj_database_url
 from decouple import config, Csv
-import cloudinary
+
 
 
 
@@ -30,22 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
     'rearm',
     'blog',
     'django_ckeditor_5',
-    
-
-    
 ]
-
-
-
+# 'django.contrib.sites',
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,18 +71,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASE_URL = config('DATABASE_URL', default=None)
-
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-    }
-else:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -128,11 +114,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Project-level static
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # production level static collection
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # media/settings.py
@@ -256,15 +242,3 @@ CKEDITOR_5_CONFIGS = {
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-cloudinary.config( 
-  cloud_name = 'dohc0nhqa',
-  api_key = '836418837643746',
-  api_secret = 'aHQAsMPUlMM-MNuprzxnX7fo4dI',
-  secure = True
-)
