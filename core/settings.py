@@ -11,6 +11,7 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -18,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 DEBUG = config('DEBUG', default=False, cast=bool)
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-6b%-4e16y8eo$f8g_qr$!90nq^a^4o3om93@$lepkl#k&3nz5m'
 ALLOWED_HOSTS = config('ALLOWED_HOSTS',default='127.0.0.1', cast=Csv())
 
 
