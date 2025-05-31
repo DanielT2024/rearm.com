@@ -56,7 +56,7 @@ class PostDetailView(DetailView):
         ).order_by('-created_at')[:5]
         context['categories'] = Category.objects.all()
         context['newsletter_form'] = NewsletterForm()
-        context['contact_form'] = ContactForm()
+        
         return context
 
 def category_posts(request, slug):
