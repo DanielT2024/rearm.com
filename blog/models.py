@@ -1,9 +1,13 @@
+import logging
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django.urls import reverse
-from django_ckeditor_5.fields import CKEditor5Field 
+from django_ckeditor_5.fields import CKEditor5Field
+from django.conf import settings 
+from cloudinary.models import CloudinaryField
 
+logger = logging.getLogger(__name__)
 User = get_user_model()
 
 class Category(models.Model):
@@ -23,7 +27,13 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = CKEditor5Field('Text', config_name='extends')
-    featured_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    if settings.DEBUG:
+        featured_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    else:
+        try:
+            featured_image = CloudinaryField('featured_image', format='webp', folder='/about', null=True, blank=True)       
+        except Exception as e:
+            logger.error(f"Error uploading blog image: {e}")
     categories = models.ManyToManyField(Category)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

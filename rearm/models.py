@@ -1,12 +1,17 @@
 # Create your models here.
+import logging
+from django.conf import settings
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.core.validators import URLValidator
 from django.core.validators import RegexValidator
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field 
-
+from cloudinary.models import CloudinaryField
 from django.utils.text import slugify
+
+
+logger = logging.getLogger(__name__)
 
 class Navbar(models.Model):
     logo = models.ImageField(upload_to='navbar/')  # Stores in `media/navbar/`
@@ -122,16 +127,25 @@ class AboutSection(models.Model):
     subtitle = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     content = CKEditor5Field('Text', config_name='extends')
-    main_image = models.ImageField(
-        upload_to='about/', 
-        help_text="Main image (1200x800px)",
-        null=True,
-        blank=True)
-    secondary_image = models.ImageField(
-        upload_to='about/', 
-        help_text="Secondary image (600x400px)",
-        null=True,
-        blank=True)
+    # use cloudinary if not in DEBUG
+    if settings.DEBUG:
+        main_image = models.ImageField(
+            upload_to='about/', 
+            help_text="Main image (1200x800px)",
+            null=True,
+            blank=True)
+        secondary_image = models.ImageField(
+            upload_to='about/', 
+            help_text="Secondary image (600x400px)",
+            null=True,
+            blank=True)
+    else:
+        try:
+            main_image = CloudinaryField('main_image', format='webp', folder='/about', null=True, blank=True)       
+            secondary_image = CloudinaryField('secondary_image', format='webp', folder='/about', null=True, blank=True)       
+        except Exception as e:
+            logger.error(f'Error uploading about section image: {e}')    
+
     meta_title = models.CharField(max_length=60, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
     is_active = models.BooleanField(default=True)
