@@ -14,7 +14,14 @@ from django.utils.text import slugify
 logger = logging.getLogger(__name__)
 
 class Navbar(models.Model):
-    logo = models.ImageField(upload_to='navbar/')  # Stores in `media/navbar/`
+    if settings.DEBUG:
+        logo = models.ImageField(upload_to='navbar/')  # Stores in `media/navbar/`
+    else:
+        try:
+            logo = CloudinaryField('logo', format='webp', folder='/Navbar')  # Stores in Cloudinary
+        except Exception as e:
+            logger.error(f"Error uploading logo image: {e}")
+    
     site_name = models.CharField(max_length=100)
 
     def logo_preview(self):
@@ -39,7 +46,13 @@ class HeroSection(models.Model):
     
     # Core fields
     page = models.CharField(max_length=20, choices=PAGE_CHOICES, unique=True)
-    background_image = models.ImageField(upload_to='hero/')
+    if settings.DEBUG:
+        background_image = models.ImageField(upload_to='hero/')
+    else:
+        try:
+            background_image = CloudinaryField('background_image', format='webp', folder='/herosection')
+        except Exception as e:
+            logger.error(f'Error uploading background image: {e}')
     title = models.CharField(max_length=100)
     subtitle = models.TextField(blank=True)
     
@@ -95,7 +108,13 @@ class Service(models.Model):
     title = models.CharField(max_length=200)
     short_description = models.TextField()
     content = CKEditor5Field('Text', config_name='extends') # For rich content
-    image = models.ImageField(upload_to='services/')
+    if settings.DEBUG:
+        image = models.ImageField(upload_to='services/')
+    else:
+        try:
+            image = CloudinaryField('image', format='webp', folder='/service')
+        except Exception as e:
+            logger.error(f'Error uploading service image:')
     is_featured = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
     
@@ -159,7 +178,14 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     bio = CKEditor5Field('Text', config_name='extends') #use the ckeditor here for the bio
-    image = models.ImageField(upload_to='team/', help_text="Optimal size: 600x600px (1:1 ratio)")
+    if settings.DEBUG:
+        image = models.ImageField(upload_to='team/', help_text="Optimal size: 600x600px (1:1 ratio)")
+    else:
+        try:
+            image = CloudinaryField('image', format='webp', folder='/TeamMember')
+        except Exception as e:
+            logger.error(f'Error uploading team member image: {e}')
+
     image_alt = models.CharField(max_length=100, blank=True)
     linkedin = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
@@ -185,7 +211,13 @@ class TeamMember(models.Model):
 
 class CompanyInfo(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='company/')
+    if settings.DEBUG:
+        logo = models.ImageField(upload_to='company/')
+    else:
+        try:
+            logo = CloudinaryField('image', format='webp', folder='/CompanyInfo')
+        except Exception as e:
+            logger.error(f'Error uploading company logo: {e}')    
     address = models.TextField()
     phone_number_1 = models.CharField(max_length=20)
     phone_number_2 = models.CharField(max_length=20, blank=True, null=True)
@@ -252,10 +284,17 @@ class Product(models.Model):
     description = models.TextField()
     # uncomment should you need it in future
     # price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    image = models.ImageField(upload_to='products/')              # Main thumbnail image
-    image_360 = models.ImageField(upload_to='products/360/', null=True, blank=True)  # 360° equirectangular image
-
+    if settings.DEBUG:
+        image = models.ImageField(upload_to='products/')              # Main thumbnail image
+        image_360 = models.ImageField(upload_to='products/360/', null=True, blank=True)  # 360° equirectangular image
+    else:
+        try:
+            image=CloudinaryField('image', format='webp', folder='/products', null=True,
+            blank=True)
+            image_360 = CloudinaryField('image_360', format='webp', folder='/products', null=True,
+            blank=True)
+        except Exception as e:
+            logger.error (f'Error uploading product image:{e}')
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -278,7 +317,13 @@ class Product(models.Model):
 class Leadership(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='leadership/')
+    if settings.DEBUG:
+        photo = models.ImageField(upload_to='leadership/')
+    else:
+        try:
+            photo = CloudinaryField('photo', format='webp', folder='/leadership')
+        except Exception as e:
+            logger.error (f'Error uploading leadership photo:{e}')
     home_excerpt = models.TextField(max_length=200, help_text="Short message for homepage")
     full_bio = models.TextField(help_text="Full bio for about page")
     is_ceo = models.BooleanField(default=False)
